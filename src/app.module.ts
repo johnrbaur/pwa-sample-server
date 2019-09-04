@@ -1,11 +1,17 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { router } from 'json-server';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { join } from 'path';
 
 @Module({
-  imports: [],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
